@@ -47,3 +47,14 @@ control 'PACKAGE INSTALLED _ TELNET and CHROME' do
     it { should be_installed}
   end
 end
+
+## service example
+control 'SERVICE INSTALLED' do
+  impact 0.8
+  title 'This test checks the service is installed'
+
+  describe service('DHCP Client') do
+    it { should be_installed }
+    it { should be_running }
+  end
+end
