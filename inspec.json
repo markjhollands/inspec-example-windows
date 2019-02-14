@@ -1,0 +1,12 @@
+{
+    "reporter" : {
+        "automate" : {
+            "stdout" : "false",
+            "url" : "https://automate.automate-demo.com/data-collector/v0",
+            "token" : "cjHePBDBVIJn_vXXxYOFfFfbL3Q=",
+            "insecure" : true,
+            "node_name" : "PicklePlum1",
+            "environment" : "dev"
+        }
+    }
+}
