@@ -1,19 +1,20 @@
-# encoding: utf-8
-# copyright: 2018, The Authors
+# Windows Versions - Check for Min of Win 2012
+# Win2016 - NT 10.0 | Win 2012 R2 - NT 6.3 | Win 2012 - NT 6.2
+#
 
-title 'sample section'
+control 'WINDOWS VERSION' do
+  impact 0.8
+  title 'This test checks for a minimum Windows version of 2012 - NT 6.2.0'
 
-# you can also use plain tests
-describe file('/tmp') do
-  it { should be_directory }
-end
+  describe os.family do
+    it { should eq 'windows' }
+  end
 
-# you add controls here
-control 'tmp-1.0' do                        # A unique ID for this control
-  impact 0.7                                # The criticality, if this control fails.
-  title 'Create /tmp directory'             # A human-readable title
-  desc 'An optional description...'
-  describe file('/tmp') do                  # The actual test
-    it { should be_directory }
+  describe os.name do
+    it { should eq 'windows_server_2016_datacenter' }
+  end
+
+  describe os.release do
+    it { should > '10.0' }
   end
 end
