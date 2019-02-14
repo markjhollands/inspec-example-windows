@@ -85,3 +85,23 @@ control 'HTTP AND HTTPS' do
       its('addresses') { should include '0.0.0.0' }
   end
 end
+
+control 'WINDOWS TASKS' do
+  impact 0.8
+  title 'This test checks the Windows Tasks'
+  
+  describe windows_task('\Microsoft\Windows\AppID\PolicyConverter') do
+    it { should be_disabled }
+  end
+
+  describe windows_task('\Microsoft\Windows\AppID\PolicyConverter') do
+    its('logon_mode') { should eq 'Interactive/Background' }
+    its('last_result') { should eq '267011' }
+    its('task_to_run') { should cmp '%Windir%\system32\appidpolicyconverter.exe' }
+    its('run_as_user') { should eq 'SYSTEM' }
+  end
+
+  describe windows_task('\Microsoft\Windows\Defrag\ScheduledDefrag') do
+    it { should exist }
+  end
+end
