@@ -34,3 +34,16 @@ control 'WINDOWS HOTFIX - LOOP' do
     end
   end
 end
+
+control 'PACKAGE INSTALLED _ TELNET and CHROME' do
+  impact 0.8
+  title 'This test checks that a package is installed'
+
+  describe package('telnetd') do
+    it { should_not be_installed }
+  end
+
+  describe package('Google Chrome') do
+    it { should be_installed}
+  end
+end
