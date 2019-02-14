@@ -58,3 +58,30 @@ control 'SERVICE INSTALLED' do
     it { should be_running }
   end
 end
+
+control 'HTTP AND HTTPS' do
+  impact 0.8
+  title 'This test checks the HTTP and HTTPS protocols'
+  
+  # Test HTTP port 80, is not listening and no protocol TCP, ICMP, UDP
+  describe port(80) do
+      it { should_not be_listening }
+      its('protocols') { should_not cmp 'tcp6' }
+      its('protocols') { should_not include('icmp') }
+      its('protocols') { should_not include('tcp') }
+      its('protocols') { should_not include('udp') }
+      its('protocols') { should_not include('udp6') }
+      its('addresses') { should_not include '0.0.0.0' }
+  end
+
+  # Test HTTPS port 443, listening with TCP and UDP
+  describe port(443) do
+      it { should be_listening }
+      its('protocols') { should_not cmp 'tcp6' }
+      its('protocols') { should_not include('icmp') }
+      its('protocols') { should include('tcp') }
+      its('protocols') { should include('udp') }
+      its('protocols') { should_not include('udp6') }
+      its('addresses') { should include '0.0.0.0' }
+  end
+end
