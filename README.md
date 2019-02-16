@@ -1,4 +1,6 @@
-# Example InSpec Profile
+# inspec-example-windows
+
+This project formed part of an on-site course on how to use Chef, Kitchen and Inspec.
 
 This example shows the implementation of an InSpec profile.
 
